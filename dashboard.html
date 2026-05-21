@@ -39,34 +39,34 @@
 
   <h1>📊 Trading Dashboard</h1>
   <div class="meta">
-    Last updated: 2026-05-21 13:19:27 UTC &nbsp;|&nbsp;
-    Market: <span class="badge-closed">🔴 CLOSED</span>
+    Last updated: 2026-05-21 14:07:44 UTC &nbsp;|&nbsp;
+    Market: <span class="badge-open">🟢 OPEN</span>
     &nbsp;|&nbsp; Auto-refresh every 5 min
   </div>
 
   <div class="cards">
     <div class="card">
       <div class="label">Portfolio Value</div>
-      <div class="value">$100,000.00</div>
+      <div class="value">$100,466.08</div>
     </div>
     <div class="card">
       <div class="label">Buying Power</div>
-      <div class="value">$165,273.60</div>
+      <div class="value">$175,260.02</div>
     </div>
     <div class="card">
       <div class="label">Day P&L</div>
       <div class="value" style="color:#22c55e">
-        ▲ $0.00
-        <span style="font-size:.9rem">(+0.00%)</span>
+        ▲ $466.08
+        <span style="font-size:.9rem">(+0.47%)</span>
       </div>
     </div>
     <div class="card">
       <div class="label">Open Positions</div>
-      <div class="value">0</div>
+      <div class="value">3</div>
     </div>
     <div class="card">
       <div class="label">Pending Orders</div>
-      <div class="value">4</div>
+      <div class="value">0</div>
     </div>
   </div>
 
@@ -77,59 +77,86 @@
         <th>Symbol</th><th>Entry</th><th>Current</th>
         <th>Mkt Value</th><th>Unreal P&L</th><th>%</th>
       </tr></thead>
-      <tbody><tr><td colspan="6" class="empty">No open positions</td></tr></tbody>
+      <tbody>
+        <tr>
+          <td><b>JD</b></td>
+          <td>$31.49</td>
+          <td>$31.38</td>
+          <td>$7,013.52</td>
+          <td style="color:#ef4444">
+            ▼ $26.48
+            <div style="height:4px;width:3%;background:#ef4444;border-radius:2px;margin-top:3px"></div>
+          </td>
+          <td style="color:#ef4444">-0.38%</td>
+        </tr>
+        <tr>
+          <td><b>JOBY</b></td>
+          <td>$9.86</td>
+          <td>$10.22</td>
+          <td>$11,612.90</td>
+          <td style="color:#22c55e">
+            ▲ $412.90
+            <div style="height:4px;width:36%;background:#22c55e;border-radius:2px;margin-top:3px"></div>
+          </td>
+          <td style="color:#22c55e">+3.69%</td>
+        </tr>
+        <tr>
+          <td><b>SOXL</b></td>
+          <td>$172.20</td>
+          <td>$176.18</td>
+          <td>$3,522.85</td>
+          <td style="color:#22c55e">
+            ▲ $79.65
+            <div style="height:4px;width:23%;background:#22c55e;border-radius:2px;margin-top:3px"></div>
+          </td>
+          <td style="color:#22c55e">+2.31%</td>
+        </tr></tbody>
     </table>
 
   <h2>Pending Orders</h2>
   <table>
     <thead><tr><th>Symbol</th><th>Side</th><th>Type</th><th>Notional</th><th>Submitted</th></tr></thead>
-    <tbody>
-        <tr>
-          <td><b>JOBY</b></td>
-          <td style="color:#22c55e">BUY</td>
-          <td>Limit @ $9.88</td>
-          <td>$11,200.00</td>
-          <td>May 21 08:00</td>
-        </tr>
-        <tr>
-          <td><b>TSLA</b></td>
-          <td style="color:#22c55e">BUY</td>
-          <td>Limit @ $409.03</td>
-          <td>$9,600.00</td>
-          <td>May 21 08:00</td>
-        </tr>
-        <tr>
-          <td><b>JD</b></td>
-          <td style="color:#22c55e">BUY</td>
-          <td>Limit @ $31.99</td>
-          <td>$7,040.00</td>
-          <td>May 21 08:00</td>
-        </tr>
-        <tr>
-          <td><b>SOXL</b></td>
-          <td style="color:#22c55e">BUY</td>
-          <td>Market</td>
-          <td>$3,443.20</td>
-          <td>May 21 08:00</td>
-        </tr></tbody>
+    <tbody><tr><td colspan="5" class="empty">No pending orders</td></tr></tbody>
   </table>
 
   <h2>Filled Today</h2>
   <table>
     <thead><tr><th>Symbol</th><th>Side</th><th>Fill Price</th><th>Qty</th><th>Total</th><th>Time</th></tr></thead>
-    <tbody><tr><td colspan="6" class="empty">No fills today yet</td></tr></tbody>
+    <tbody>
+        <tr>
+          <td><b>JOBY</b></td>
+          <td style="color:#22c55e">BUY</td>
+          <td>$9.86</td>
+          <td>1135.9026</td>
+          <td>$11,200.00</td>
+          <td>13:32:53</td>
+        </tr>
+        <tr>
+          <td><b>JD</b></td>
+          <td style="color:#22c55e">BUY</td>
+          <td>$31.49</td>
+          <td>223.5386</td>
+          <td>$7,040.00</td>
+          <td>13:31:37</td>
+        </tr>
+        <tr>
+          <td><b>SOXL</b></td>
+          <td style="color:#22c55e">BUY</td>
+          <td>$172.20</td>
+          <td>19.9958</td>
+          <td>$3,443.20</td>
+          <td>13:34:04</td>
+        </tr></tbody>
   </table>
 
   <h2>Latest Status Log</h2>
   <div class="log"><div class="log-line">
 ═════════════════════════════════════════════════════════════════</div>
-<div class="log-line">  CHECK STATUS — 2026-05-21 13:19:26</div>
+<div class="log-line">  CHECK STATUS — 2026-05-21 14:07:41</div>
 <div class="log-line">═════════════════════════════════════════════════════════════════</div>
 <div class="log-line">
-  Symbols to analyze: JD, JOBY, SOXL, TSLA</div>
+  Symbols to analyze: JD, JOBY, SOXL</div>
 <div class="log-line">  Running fresh analysis — this may take 20-30 seconds...
-</div>
-<div class="log-line">  No adjustments required — all positions look healthy.
 </div></div>
 
 </body>
