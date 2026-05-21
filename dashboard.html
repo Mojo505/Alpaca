@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="300">
+  <title>Trading Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f172a; color: #e2e8f0; padding: 20px; }
+    h1   { font-size: 1.4rem; color: #94a3b8; margin-bottom: 4px; }
+    h2   { font-size: 1rem; color: #64748b; margin: 24px 0 12px;
+             text-transform: uppercase; letter-spacing: .08em; }
+    .meta { font-size: .8rem; color: #475569; margin-bottom: 24px; }
+    .cards { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+    .card  { background: #1e293b; border-radius: 12px; padding: 20px;
+               flex: 1; min-width: 180px; }
+    .card .label { font-size: .75rem; color: #64748b; margin-bottom: 6px; }
+    .card .value { font-size: 1.5rem; font-weight: 700; }
+    table  { width: 100%; border-collapse: collapse; background: #1e293b;
+               border-radius: 12px; overflow: hidden; margin-bottom: 8px; }
+    th     { background: #0f172a; padding: 10px 14px; text-align: left;
+               font-size: .75rem; color: #64748b; text-transform: uppercase; }
+    td     { padding: 10px 14px; border-top: 1px solid #1e293b;
+               font-size: .875rem; background: #1e293b; }
+    tr:hover td { background: #263347; }
+    .empty { color: #475569; font-style: italic; text-align: center; padding: 20px; }
+    .log   { background: #1e293b; border-radius: 12px; padding: 16px;
+               font-family: monospace; font-size: .8rem; color: #94a3b8;
+               max-height: 300px; overflow-y: auto; }
+    .log-line { padding: 2px 0; border-bottom: 1px solid #0f172a; }
+    .badge-open   { color: #22c55e; font-weight: 700; }
+    .badge-closed { color: #ef4444; font-weight: 700; }
+    @media(max-width:600px) { .card { min-width: 140px; } }
+  </style>
+</head>
+<body>
+
+  <h1>📊 Trading Dashboard</h1>
+  <div class="meta">
+    Last updated: 2026-05-21 09:19:14 UTC &nbsp;|&nbsp;
+    Market: <span class="badge-closed">🔴 CLOSED</span>
+    &nbsp;|&nbsp; Auto-refresh every 5 min
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="label">Portfolio Value</div>
+      <div class="value">$100,000.00</div>
+    </div>
+    <div class="card">
+      <div class="label">Buying Power</div>
+      <div class="value">$165,273.60</div>
+    </div>
+    <div class="card">
+      <div class="label">Day P&L</div>
+      <div class="value" style="color:#22c55e">
+        ▲ $0.00
+        <span style="font-size:.9rem">(+0.00%)</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="label">Open Positions</div>
+      <div class="value">0</div>
+    </div>
+    <div class="card">
+      <div class="label">Pending Orders</div>
+      <div class="value">4</div>
+    </div>
+  </div>
+
+  <h2>Open Positions</h2>
+  
+    <table>
+      <thead><tr>
+        <th>Symbol</th><th>Entry</th><th>Current</th>
+        <th>Mkt Value</th><th>Unreal P&L</th><th>%</th>
+      </tr></thead>
+      <tbody><tr><td colspan="6" class="empty">No open positions</td></tr></tbody>
+    </table>
+
+  <h2>Pending Orders</h2>
+  <table>
+    <thead><tr><th>Symbol</th><th>Side</th><th>Type</th><th>Notional</th><th>Submitted</th></tr></thead>
+    <tbody>
+        <tr>
+          <td><b>JOBY</b></td>
+          <td style="color:#22c55e">BUY</td>
+          <td>Limit @ $9.88</td>
+          <td>$11,200.00</td>
+          <td>May 21 08:00</td>
+        </tr>
+        <tr>
+          <td><b>TSLA</b></td>
+          <td style="color:#22c55e">BUY</td>
+          <td>Limit @ $409.03</td>
+          <td>$9,600.00</td>
+          <td>May 21 08:00</td>
+        </tr>
+        <tr>
+          <td><b>JD</b></td>
+          <td style="color:#22c55e">BUY</td>
+          <td>Limit @ $31.99</td>
+          <td>$7,040.00</td>
+          <td>May 21 08:00</td>
+        </tr>
+        <tr>
+          <td><b>SOXL</b></td>
+          <td style="color:#22c55e">BUY</td>
+          <td>Market</td>
+          <td>$3,443.20</td>
+          <td>May 21 08:00</td>
+        </tr></tbody>
+  </table>
+
+  <h2>Filled Today</h2>
+  <table>
+    <thead><tr><th>Symbol</th><th>Side</th><th>Fill Price</th><th>Qty</th><th>Total</th><th>Time</th></tr></thead>
+    <tbody><tr><td colspan="6" class="empty">No fills today yet</td></tr></tbody>
+  </table>
+
+  <h2>Latest Status Log</h2>
+  <div class="log"><div class="log-line">
+═════════════════════════════════════════════════════════════════</div>
+<div class="log-line">  CHECK STATUS — 2026-05-21 09:19:12</div>
+<div class="log-line">═════════════════════════════════════════════════════════════════</div>
+<div class="log-line">
+  Symbols to analyze: JD, JOBY, SOXL, TSLA</div>
+<div class="log-line">  Running fresh analysis — this may take 20-30 seconds...
+</div>
+<div class="log-line">  No adjustments required — all positions look healthy.
+</div></div>
+
+</body>
+</html>
