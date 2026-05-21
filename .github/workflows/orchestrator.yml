@@ -1,0 +1,50 @@
+name: Orchestrator (daily at market open)
+
+on:
+  schedule:
+    # 9:00 AM ET = 13:00 UTC (summer DST)
+    - cron: '0 13 * * 1-5'   # Mon–Fri 9:00 AM ET
+  workflow_dispatch:
+    inputs:
+      amount:
+        description: 'Dollar amount to invest (e.g. 1000)'
+        required: true
+        default: '500'
+
+jobs:
+  trade:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Orchestrator
+        env:
+          ALPACA_API_KEY:      ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_SECRET_KEY:   ${{ secrets.ALPACA_SECRET_KEY }}
+          ALPACA_BASE_URL:     ${{ secrets.ALPACA_BASE_URL }}
+          ANTHROPIC_API_KEY:   ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN:  ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:    ${{ secrets.TELEGRAM_CHAT_ID }}
+          INVEST_AMOUNT:       ${{ github.event.inputs.amount || secrets.DEFAULT_INVEST_AMOUNT }}
+        run: python orchestrator.py --amount $INVEST_AMOUNT --report
+
+      - name: Deploy dashboard to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir:  ./report
+          keep_files:   true

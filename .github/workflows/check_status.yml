@@ -1,0 +1,58 @@
+name: Check Status (every 30 min)
+
+on:
+  schedule:
+    # Every 30 minutes, Mon–Fri, 9:30am–4:00pm ET
+    # ET = UTC-4 (summer DST) so 9:30am ET = 13:30 UTC
+    - cron: '30 13 * * 1-5'   # 9:30 AM ET
+    - cron: '0  14 * * 1-5'   # 10:00 AM ET
+    - cron: '30 14 * * 1-5'   # 10:30 AM ET
+    - cron: '0  15 * * 1-5'   # 11:00 AM ET
+    - cron: '30 15 * * 1-5'   # 11:30 AM ET
+    - cron: '0  16 * * 1-5'   # 12:00 PM ET
+    - cron: '30 16 * * 1-5'   # 12:30 PM ET
+    - cron: '0  17 * * 1-5'   # 1:00 PM ET
+    - cron: '30 17 * * 1-5'   # 1:30 PM ET
+    - cron: '0  18 * * 1-5'   # 2:00 PM ET
+    - cron: '30 18 * * 1-5'   # 2:30 PM ET
+    - cron: '0  19 * * 1-5'   # 3:00 PM ET
+    - cron: '30 19 * * 1-5'   # 3:30 PM ET
+    - cron: '0  20 * * 1-5'   # 4:00 PM ET (close)
+  workflow_dispatch:            # Allow manual trigger from GitHub UI
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   # needed to push dashboard to gh-pages
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run checkStatus
+        env:
+          ALPACA_API_KEY:      ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_SECRET_KEY:   ${{ secrets.ALPACA_SECRET_KEY }}
+          ALPACA_BASE_URL:     ${{ secrets.ALPACA_BASE_URL }}
+          ANTHROPIC_API_KEY:   ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN:  ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:    ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python checkStatus.py --auto --report
+
+      - name: Deploy dashboard to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir:  ./report
+          keep_files:   true   # don't wipe old files on each deploy
